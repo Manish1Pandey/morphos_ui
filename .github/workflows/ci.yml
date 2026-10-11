@@ -15,7 +15,9 @@ jobs:
           channel: stable
       - run: flutter pub get
       - run: dart format --output=none --set-exit-if-changed lib test
-      - run: flutter analyze
+      # Package code only: example/ and benchmark/ are separate apps with
+      # their own dependencies and are analyzed in their own steps.
+      - run: flutter analyze lib test
       - run: flutter test
       - name: Tests in Chrome (web engine)
         run: flutter test --platform chrome
@@ -25,6 +27,11 @@ jobs:
           flutter pub get
           flutter analyze
           flutter build web
+      - name: Benchmark app analyzes
+        working-directory: benchmark
+        run: |
+          flutter pub get
+          flutter analyze
       - name: pub.dev score
         run: |
           dart pub global activate pana
