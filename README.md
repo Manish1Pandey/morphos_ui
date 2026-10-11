@@ -284,6 +284,12 @@ flutter drive --profile -d <device> \
 - `MorphEffect.sheen` depends on fragment-shader support for `drawVertices`
   on the active renderer.
 
+## Links
+
+- **Documentation and live demo:** [flutterdev.in/packages/morphos_ui](https://flutterdev.in/packages/morphos_ui/)
+- **More Flutter packages:** [flutterdev.in](https://flutterdev.in)
+- **Learn data structures & algorithms in Dart:** [Algoistan](https://algoistan.flutterdev.in)
+
 ## License
 
 MIT
