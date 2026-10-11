@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze
+      - run: flutter test
+      - name: Tests in Chrome (web engine)
+        run: flutter test --platform chrome
+      - name: Example builds for the web
+        working-directory: example
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter build web
+      - name: pub.dev score
+        run: |
+          dart pub global activate pana
+          dart pub global run pana --no-warning --exit-code-threshold 0
+
+  # Runs the on-device smoke test (real engine, pixel checks) on each desktop OS.
+  smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Linux desktop dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev xvfb
+      - name: Smoke test (Windows)
+        if: runner.os == 'Windows'
+        working-directory: example
+        run: flutter test integration_test/smoke_test.dart -d windows
+      - name: Smoke test (Linux)
+        if: runner.os == 'Linux'
+        working-directory: example
+        run: xvfb-run -a flutter test integration_test/smoke_test.dart -d linux
+      - name: Smoke test (macOS)
+        if: runner.os == 'macOS'
+        working-directory: example
+        run: flutter test integration_test/smoke_test.dart -d macos
