@@ -2,7 +2,7 @@ name: morphos_ui
 description: >-
   Animate thousands of Flutter UI items on one spring-driven surface: a single
   render object with spring physics, viewport culling and 100k-node scaling.
-version: 0.1.0
+version: 0.1.1
 homepage: https://flutterdev.in/packages/morphos_ui/
 repository: https://github.com/Manish1Pandey/morphos_ui
 issue_tracker: https://github.com/Manish1Pandey/morphos_ui/issues
