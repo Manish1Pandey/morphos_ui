@@ -12,6 +12,10 @@ MorphOSField(
 )
 ```
 
+![A grid of cards springs into a list and back, a tapped card grows, and a flicked round card flies off and springs back to its slot](screenshots/demo.gif)
+
+*The example app on Flutter web: one render object draws every card. Swapping the spec morphs the grid into a list and back, a tapped card grows, and a flicked round card keeps its momentum before it springs home.*
+
 ## What it does, and what it doesn't
 
 | Can | Cannot (by design) |
