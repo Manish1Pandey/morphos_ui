@@ -9,6 +9,7 @@ import 'dart:typed_data';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/game.dart';
+// ignore: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:morphos_ui/morphos_ui.dart';

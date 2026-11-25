@@ -4,6 +4,7 @@
 //   flutter drive --profile -d macos --driver=test_driver/trace_driver.dart \
 //     --target=integration_test/trace_test.dart
 
+// ignore: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
